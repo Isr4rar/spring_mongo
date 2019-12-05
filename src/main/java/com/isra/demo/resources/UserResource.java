@@ -1,5 +1,6 @@
 package com.isra.demo.resources;
 
+import com.isra.demo.domain.Post;
 import com.isra.demo.domain.User;
 import com.isra.demo.dto.UserDTO;
 import com.isra.demo.services.UserService;
@@ -52,6 +53,12 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable  String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 
